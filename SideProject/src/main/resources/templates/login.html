@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>login</title>
+  <style>
+
+  </style>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="box">
+  <h2>Good Habit</h2>
+  <p th:text="${msg}" style="color: red"></p>
+  <form th:action="@{'/api/auth'}" method="POST">
+    <div class="inputBox">
+      <input type="text" name="email" placeholder="Please enter email!">
+      <label>Email</label>
+    </div>
+    <div class="inputBox">
+      <input type="password" name="pwd" placeholder="Please enter password!">
+      <label>Password</label>
+    </div>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+<ul>Do not have an account? Click <a href="/register">here</a> to Register!</ul>
+</body>
+</html>

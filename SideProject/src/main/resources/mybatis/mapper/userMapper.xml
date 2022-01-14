@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sideproject.mapper.UserMapper">
+    <insert id="addUser">
+        INSERT into user (username, pwd, email) VALUE (#{username}, #{pwd}, #{email})
+    </insert>
+    <update id="updateDays">
+        UPDATE user SET days=days+1 WHERE id=#{id}
+    </update>
+    <update id="updateName">
+        UPDATE user SET username=#{name} WHERE id=#{id}
+    </update>
+    <update id="updatePwd">
+        UPDATE user SET pwd=#{pwd} WHERE id=#{id}
+    </update>
+    <select id="queryUserByEmail" resultType="com.example.sideproject.pojo.User">
+        SELECT * FROM user WHERE email=#{email}
+    </select>
+</mapper>

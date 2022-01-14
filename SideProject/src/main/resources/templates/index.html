@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="/bootstrap/js/jQuery.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <script language="JavaScript">
+
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{'/home'}">Good Habit</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{'/home'}">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Habits<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{'/task'}">My Habit</a></li>
+                        <li><a th:href="@{'/tasks'}">Others Habit</a></li>
+                        <li><a th:href="@{'/add'}">Add New Task</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Operation<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{'/profile'}">Profile</a></li>
+                        <li><a th:href="@{'/user/name'}">Set Name</a></li>
+                        <li><a th:href="@{'/user/pwd'}">Set Password</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right" th:action="@{'/search'}" method="post">
+                <div class="form-group">
+                    <input type="text" name="search" placeholder="search for Others Task!" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success" value="Submit">search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron">
+    <div class="container">
+        <h1>
+            <script language=javascript>
+                now = new Date(),hour = now.getHours();
+                if(hour <= 3 || hour>17){document.write('Good Evening! ');}
+                else if (hour > 3 && hour <= 11){document.write('Good Morning! ');}
+                else if (hour < 11 || hour <= 17){document.write('Good Afternoon! ');}
+            </script>
+            <span th:text="${username}"></span>
+        </h1>
+        <p>You have adhered to your good habits for <span th:text="${numDay}"></span> days, please keep going!</p>
+        <p><a class="btn btn-primary btn-lg" href="/doc.pdf" role="button">About This Project &raquo;</a></p>
+    </div>
+</div>
+<div class="page-header" style="margin-left:40%">
+    <h1>Today's Task</h1>
+</div>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Finished</th>
+                <th>Option</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="t:${tasks}">
+                <td th:text="${t.name}">Onions</td>
+                <td th:text="${t.isDone}? 'yes' : 'no'"></td>
+                <td><a th:href="@{'done?id=' + ${t.id}}">I Finish this Task!</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

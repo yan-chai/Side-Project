@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sideproject.mapper.TaskMapper">
+    <insert id="addTask">
+        INSERT INTO task (user_id, name, is_public) VALUE (#{user_id}, #{name}, #{isPublic})
+    </insert>
+    <insert id="addRepeat">
+        INSERT INTO repeat_task (task_id, day) VALUE (#{task_id}, #{day})
+    </insert>
+    <update id="schedule">
+        UPDATE repeat_task SET is_schedule=#{schedule} WHERE task_id=#{task_id} AND day=#{day}
+    </update>
+    <update id="updateTask">
+        UPDATE task SET name=#{name}, is_public=#{isPublic} WHERE id=#{task_id}
+    </update>
+    <update id="done">
+        UPDATE today SET isDone=true WHERE id=#{id}
+    </update>
+    <delete id="deleteTask">
+        DELETE FROM task WHERE id=#{task_id}
+    </delete>
+    <delete id="deleteRepeat">
+        DELETE FROM repeat_task WHERE task_id=#{task_id}
+    </delete>
+    <select id="queryTaskByUserName" resultType="java.lang.Integer">
+        SELECT id FROM task WHERE user_id=#{user_id} AND name=#{name} ORDER BY id DESC LIMIT 1
+    </select>
+    <select id="queryTaskByUser" resultType="com.example.sideproject.pojo.Task">
+        SELECT * FROM task WHERE user_id=#{user_id}
+    </select>
+    <select id="queryAllTask" resultType="com.example.sideproject.pojo.Task">
+        SELECT * FROM task WHERE is_public=true
+    </select>
+    <select id="queryTaskById" resultType="com.example.sideproject.pojo.Task">
+        SELECT * FROM task WHERE id=#{id}
+    </select>
+    <select id="queryTaskRepeatById" resultType="java.lang.Integer">
+        SELECT day FROM repeat_task WHERE task_id=#{id} AND is_schedule=true
+    </select>
+    <select id="getTodayTaskById" resultType="com.example.sideproject.pojo.TodayTask">
+        SELECT * FROM today WHERE user_id=#{id}
+    </select>
+    <select id="queryTodayTaskById" resultType="com.example.sideproject.pojo.TodayTask">
+        SELECT * FROM today WHERE id=#{id}
+    </select>
+    <select id="queryAllTodayUser" resultType="java.lang.Integer">
+        SELECT DISTINCT user_id FROM today;
+    </select>
+    <select id="queryNumofTodayTask" resultType="java.lang.Integer">
+        SELECT COUNT(id) as c FROM today WHERE user_id=#{user_id}
+    </select>
+    <select id="queryNumOfDoneTask" resultType="java.lang.Integer">
+        SELECT COUNT(id) as c FROM today WHERE user_id=#{user_id} AND isDone=true
+    </select>
+    <select id="search" resultType="com.example.sideproject.pojo.Task">
+        SELECT * FROM task WHERE name LIKE CONCAT('%', #{s}, '%') AND is_public=true;
+    </select>
+</mapper>

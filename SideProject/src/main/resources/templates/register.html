@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/login.css'}">
+</head>
+<body>
+<div class="box">
+    <h2>Good Habit</h2>
+    <form action="/api/regi" method="POST">
+        <div class="inputBox">
+            <input type="text" name="email" placeholder="Please enter a email!">
+            <label>email</label>
+        </div>
+        <div class="inputBox">
+            <input type="text" name="username" placeholder="Please choose a name!">
+            <label>name</label>
+        </div>
+        <div class="inputBox">
+            <input type="password" name="pwd" placeholder="Please choose a password!">
+            <label>Password</label>
+        </div>
+        <input type="submit" value="Submit" id="submit">
+    </form>
+</div>
+<ul>Already have an account? Click <a href="/login">here</a> to Login! </ul>
+</body>
+</html>

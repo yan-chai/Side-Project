@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edit Task</title>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <script type="text/javascript" src="/bootstrap/js/jQuery.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+  <script language="JavaScript">
+
+  </script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" th:href="@{'/home'}">Good Habit</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a th:href="@{'/home'}">Home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Habits<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a th:href="@{'/task'}">My Habit</a></li>
+            <li><a th:href="@{'/tasks'}">Others Habit</a></li>
+            <li><a th:href="@{'/add'}">Add New Task</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Operation<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a th:href="@{'/profile'}">Profile</a></li>
+            <li><a th:href="@{'/user/name'}">Set Name</a></li>
+            <li><a th:href="@{'/user/pwd'}">Set Password</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-right" th:action="@{'/search'}" method="post">
+        <div class="form-group">
+          <input type="text" name="search" placeholder="search for Others Task!" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success" value="Submit">search</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/logout">Log Out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="page-header" style="margin-left:150px; margin-top: 5%">
+  <h1>Add new Task</h1>
+</div>
+<div class="container-fluid" style="margin-top:50px; margin-left: 20%;"><div class="row">
+  <div class="col-md-6">
+    <h2 class="sub-header">Add new Task</h2>
+    <div class="table-responsive">
+      <div style="margin-top:50px;">
+        <form th:action="@{'/api/edit?id=' + ${id}}" method="POST">
+          <div class='form-group'>
+            <label for='name'>Name</label>
+            <input name='name' type='text' class='form-control' id='name' th:value="${name}">
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" name="checkbox" type="checkbox" value="1" id="1" th:checked="${flag1} ? 'checked'">
+            <label class="form-check-label" for="1">
+              Sunday
+            </label>
+            <input class="form-check-input" name="checkbox" type="checkbox" value="2" id="2" th:checked="${flag2} ? 'checked'">
+            <label class="form-check-label" for="2">
+              Monday
+            </label>
+            <input class="form-check-input" name="checkbox" type="checkbox" value="3" id="3" th:checked="${flag3} ? 'checked'">
+            <label class="form-check-label" for="3">
+              Tuesday
+            </label>
+            <input class="form-check-input" name="checkbox" type="checkbox" value="4" id="4" th:checked="${flag4} ? 'checked'">
+            <label class="form-check-label" for="4">
+              Wednesday
+            </label>
+            <input class="form-check-input" name="checkbox" type="checkbox" value="5" id="5" th:checked="${flag5} ? 'checked'">
+            <label class="form-check-label" for="5">
+              Thursday
+            </label>
+            <input class="form-check-input" name="checkbox" type="checkbox" value="6" id="6" th:checked="${flag6} ? 'checked'">
+            <label class="form-check-label" for="6">
+              Friday
+            </label>
+            <input class="form-check-input" name="checkbox" type="checkbox" value="7" id="7" th:checked="${flag7} ? 'checked'">
+            <label class="form-check-label" for="7">
+              Saturday
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="is_public" id="p1" value="1" th:checked="${public} ? 'checked'">
+            <label class="form-check-label" for="p1">
+              Public
+            </label>
+            <input class="form-check-input" type="radio" name="is_public" id="p2" value="0" th:checked="${non_public} ? 'checked'">
+            <label class="form-check-label" for="p2">
+              Private
+            </label>
+          </div>
+          <button type="submit" class="btn btn-default" value="Submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
